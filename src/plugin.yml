@@ -1,0 +1,6 @@
+name: NeoPartyExp
+main: me.neoblade298.neopartyexp.Main
+author: [Neoblade298]
+depend: [MythicMobs, Parties]
+version: 1.0
+api-version: 1.16

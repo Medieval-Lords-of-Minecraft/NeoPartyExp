@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="src/spigot-api-1.14.4-R0.1-SNAPSHOT-shaded.jar"/>
+	<classpathentry kind="lib" path="src/MythicMobs-4.11.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="src/Parties-2.6.16.jar"/>
+	<classpathentry kind="lib" path="src/SkillAPI.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
