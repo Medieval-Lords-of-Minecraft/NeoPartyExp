@@ -1,6 +1,12 @@
 name: NeoPartyExp
-main: me.neoblade298.neopartyexp.Main
+main: me.neoblade298.neopartyexp.NeoPartyExp
 author: [Neoblade298]
-depend: [MythicMobs, Parties]
+depend: [MythicMobs, Parties, NeoCore]
+softdepend: [SkillAPI]
 version: 1.0
 api-version: 1.16
+commands:
+   partyfinder:
+      description: Run to find similarly leveled players
+      usage: /pf
+      aliases: [pf]
