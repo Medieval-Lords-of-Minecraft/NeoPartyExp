@@ -45,10 +45,11 @@ public class CmdPartyFinder implements Subcommand {
 	public void run(CommandSender s, String[] args) {
 		ComponentBuilder msg = null;
 		Player p = (Player) s;
+		if (SkillAPI.getPlayerData(p).getMainClass() == null) Util.msg(s, "&cFirst you need a class! /warp classes");
 		int sLevel = SkillAPI.getPlayerData(p).getMainClass().getLevel();
 		boolean senderInParty = Parties.getApi().isPlayerInParty(p.getUniqueId());
 		for (Player target : Bukkit.getOnlinePlayers()) {
-			if (p == s || SkillAPI.getPlayerData(target) == null) continue;
+			if (p == target || SkillAPI.getPlayerData(target).getMainClass() == null) continue;
 			
 			int tLevel = SkillAPI.getPlayerData(target).getMainClass().getLevel();
 			int diff = Math.abs(sLevel - tLevel);
@@ -57,12 +58,13 @@ public class CmdPartyFinder implements Subcommand {
 			String clss = SkillAPI.getPlayerData(target).getMainClass().getData().getName();
 			Party targetParty = Parties.getApi().getPartyOfPlayer(target.getUniqueId());
 			boolean targetInParty = targetParty != null;
-			String text = "§7- §fLv " + tLevel + " §6" + p.getName() + " §7[§e" + clss + "§7] | §cParty: " + (targetInParty ? targetParty.getName() : "N/A");
+			String text = "§7- §fLv " + tLevel + " §6" + target.getName() + " §7[§e" + clss + "§7] | §cParty: " + (targetInParty ? targetParty.getName() : "N/A");
+			text += " §a[Click me!]";
 			if (msg == null) {
 				msg = new ComponentBuilder(text);
 			}
 			else {
-				msg.append(new TextComponent(text));
+				msg.append(new TextComponent("\n" + text));
 			}
 			String click = createClickCommand(target, targetParty, senderInParty, targetInParty);
 			if (click != null) msg.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, click));
@@ -73,7 +75,8 @@ public class CmdPartyFinder implements Subcommand {
 			Util.msg(s, "&7No players found within 10 levels of you! Try again later.");
 		}
 		else {
-			Util.msg(s, "&7Found the following players:");
+			Util.msg(s, "&fClick any of the below players!");
+			s.spigot().sendMessage(msg.create());
 		}
 	}
 
