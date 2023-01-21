@@ -17,7 +17,7 @@ import com.sucy.skill.api.enums.ExpSource;
 import io.lumine.mythic.bukkit.events.MythicMobLootDropEvent;
 import io.lumine.mythic.core.drops.Drop;
 import io.lumine.mythic.core.drops.droppables.SkillAPIDrop;
-import me.neoblade298.neocore.commands.CommandManager;
+import me.neoblade298.neocore.bukkit.commands.CommandManager;
 import me.neoblade298.neopartyexp.commands.CmdPartyFinder;
 
 public class NeoPartyExp extends JavaPlugin implements org.bukkit.event.Listener {
