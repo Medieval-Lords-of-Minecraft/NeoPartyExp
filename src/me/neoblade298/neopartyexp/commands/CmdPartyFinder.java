@@ -11,7 +11,7 @@ import com.sucy.skill.SkillAPI;
 import me.neoblade298.neocore.bukkit.commands.CommandArguments;
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
 import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.BukkitUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -45,7 +45,7 @@ public class CmdPartyFinder implements Subcommand {
 	public void run(CommandSender s, String[] args) {
 		ComponentBuilder msg = null;
 		Player p = (Player) s;
-		if (SkillAPI.getPlayerData(p).getMainClass() == null) Util.msg(s, "&cFirst you need a class! /warp classes");
+		if (SkillAPI.getPlayerData(p).getMainClass() == null) BukkitUtil.msg(s, "&cFirst you need a class! /warp classes");
 		int sLevel = SkillAPI.getPlayerData(p).getMainClass().getLevel();
 		boolean senderInParty = Parties.getApi().isPlayerInParty(p.getUniqueId());
 		for (Player target : Bukkit.getOnlinePlayers()) {
@@ -72,10 +72,10 @@ public class CmdPartyFinder implements Subcommand {
 		}
 		
 		if (msg == null) {
-			Util.msg(s, "&7No players found within 10 levels of you! Try again later.");
+			BukkitUtil.msg(s, "&7No players found within 10 levels of you! Try again later.");
 		}
 		else {
-			Util.msg(s, "&fClick any of the below players!");
+			BukkitUtil.msg(s, "&fClick any of the below players!");
 			s.spigot().sendMessage(msg.create());
 		}
 	}
