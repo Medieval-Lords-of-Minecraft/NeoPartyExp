@@ -17,16 +17,18 @@ import com.sucy.skill.api.enums.ExpSource;
 import io.lumine.mythic.bukkit.events.MythicMobLootDropEvent;
 import io.lumine.mythic.core.drops.Drop;
 import io.lumine.mythic.core.drops.droppables.SkillAPIDrop;
-import me.neoblade298.neocore.bukkit.commands.CommandManager;
+import me.neoblade298.neocore.bukkit.commands.SubcommandManager;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
 import me.neoblade298.neopartyexp.commands.CmdPartyFinder;
+import net.md_5.bungee.api.ChatColor;
 
 public class NeoPartyExp extends JavaPlugin implements org.bukkit.event.Listener {
 	
 	public void onEnable() {
 		Bukkit.getServer().getLogger().info("NeoPartyExp Enabled");
 		getServer().getPluginManager().registerEvents(this, this);
-		CommandManager mngr = new CommandManager("partyfinder", this);
-		mngr.register(new CmdPartyFinder());
+		SubcommandManager mngr = new SubcommandManager("partyfinder", null, ChatColor.RED, this);
+		mngr.register(new CmdPartyFinder("partyfinder", "Look for suitable players to party with", null, SubcommandRunner.PLAYER_ONLY));
 	}
 	
 	public void onDisable() {

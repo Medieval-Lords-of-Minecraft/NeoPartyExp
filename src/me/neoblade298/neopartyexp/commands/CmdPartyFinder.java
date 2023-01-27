@@ -8,44 +8,26 @@ import com.alessiodp.parties.api.Parties;
 import com.alessiodp.parties.api.interfaces.Party;
 import com.sucy.skill.SkillAPI;
 
-import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
-import me.neoblade298.neocore.bukkit.util.BukkitUtil;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.util.Util;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 
-public class CmdPartyFinder implements Subcommand {
-	private static final CommandArguments args = new CommandArguments();
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.PLAYER_ONLY;
-	}
-
-	@Override
-	public String getKey() {
-		return "";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Looks for suitable players to party with";
+public class CmdPartyFinder extends Subcommand {
+	public CmdPartyFinder(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
 	}
 
 	@Override
 	public void run(CommandSender s, String[] args) {
 		ComponentBuilder msg = null;
 		Player p = (Player) s;
-		if (SkillAPI.getPlayerData(p).getMainClass() == null) BukkitUtil.msg(s, "&cFirst you need a class! /warp classes");
+		if (SkillAPI.getPlayerData(p).getMainClass() == null) Util.msg(s, "&cFirst you need a class! /warp classes");
 		int sLevel = SkillAPI.getPlayerData(p).getMainClass().getLevel();
 		boolean senderInParty = Parties.getApi().isPlayerInParty(p.getUniqueId());
 		for (Player target : Bukkit.getOnlinePlayers()) {
@@ -72,17 +54,12 @@ public class CmdPartyFinder implements Subcommand {
 		}
 		
 		if (msg == null) {
-			BukkitUtil.msg(s, "&7No players found within 10 levels of you! Try again later.");
+			Util.msg(s, "&7No players found within 10 levels of you! Try again later.");
 		}
 		else {
-			BukkitUtil.msg(s, "&fClick any of the below players!");
+			Util.msg(s, "&fClick any of the below players!");
 			s.spigot().sendMessage(msg.create());
 		}
-	}
-
-	@Override
-	public CommandArguments getArgs() {
-		return args;
 	}
 	
 	private Text createHoverText(boolean senderInParty, boolean targetInParty) {
