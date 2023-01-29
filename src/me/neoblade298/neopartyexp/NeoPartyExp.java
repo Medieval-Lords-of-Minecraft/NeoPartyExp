@@ -27,8 +27,8 @@ public class NeoPartyExp extends JavaPlugin implements org.bukkit.event.Listener
 	public void onEnable() {
 		Bukkit.getServer().getLogger().info("NeoPartyExp Enabled");
 		getServer().getPluginManager().registerEvents(this, this);
-		SubcommandManager mngr = new SubcommandManager("partyfinder", null, ChatColor.RED, this);
-		mngr.register(new CmdPartyFinder("partyfinder", "Look for suitable players to party with", null, SubcommandRunner.PLAYER_ONLY));
+		SubcommandManager mngr = new SubcommandManager("", null, ChatColor.RED, this);
+		mngr.register(new CmdPartyFinder("", "Look for suitable players to party with", null, SubcommandRunner.PLAYER_ONLY));
 	}
 	
 	public void onDisable() {
